@@ -2,22 +2,25 @@
 
 """
 Module defines function that changes all topics of a school document based
-        on the name
+on the name.
 """
 
+from typing import List
+from pymongo.collection import Collection
 
-def update_topics(mongo_collection, name, topics):
+
+def update_topics(mongo_collection: Collection, name: str, topics: List[str]) -> None:
     """
-    updates all topics of a school doc based on the name
+    Updates all topics of a school document based on the name.
 
-    args:
-    mongo_collection {pymongo.Collection} - collection object
-    name {str} - name filtered for in collection
-    topics {List[str]} - list of strings approached in the school
+    Args:
+    mongo_collection (Collection): The collection object.
+    name (str): The name to filter for in the collection.
+    topics (List[str]): List of strings representing the new topics.
 
-    returns:
-    Never
+    Returns:
+    None
     """
     query = {"name": name}
-    newValues = {"$set": {"topics": topics}}
-    mongo_collection.update_many(query, newValues)
+    new_values = {"$set": {"topics": topics}}
+    mongo_collection.update_many(query, new_values)

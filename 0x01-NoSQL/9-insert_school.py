@@ -5,16 +5,20 @@ Module defines a Python function that inserts a new document
         in a collection based on kwargs
 """
 
+from typing import Any, Dict
+from pymongo.collection import Collection
+from bson.objectid import ObjectId
 
-def insert_school(mongo_collection, **kwargs):
+
+def insert_school(mongo_collection: Collection, **kwargs: Dict[str, Any]) -> ObjectId:
     """
-    inserts new doc in collection
+    Inserts a new document into the specified MongoDB collection.
 
-    args:
-    mongo_collection - db.collection names
-    kwargs - json representation of obj
+    Parameters:
+        mongo_collection (Collection): MongoDB collection to insert doc
+        **kwargs (Dict[str, Any]): json repr of obj doc to be inserted
 
-    returns:
-    new inserted id
+    Returns:
+        ObjectId: The ID of the newly inserted document.
     """
     return mongo_collection.insert_one(kwargs).inserted_id

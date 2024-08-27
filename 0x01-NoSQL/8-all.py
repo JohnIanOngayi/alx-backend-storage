@@ -4,16 +4,20 @@
 Module defines function that lists all documents in a collection
 """
 
+from typing import List, Dict, Any
+from pymongo.collection import Collection
 
-def list_all(mongo_collection):
+
+def list_all(mongo_collection: Collection) -> List[Dict[str, Any]]:
     """
-    lists all documents in a collection
+    Lists all documents in a MongoDB collection.
 
-    args:
-    mongo_collection {pymongo.Collection} - db collection of documents
+    Args:
+        mongo_collection (Collection): MongoDB collection to list doc from.
 
-    returns:
-    list of documents or empty list
+    Returns:
+        List[Dict[str, Any]]: list of documents, represented as dictionaries.
+                              or empty list if no docs or Error occurs
     """
     try:
         doc_list = []
